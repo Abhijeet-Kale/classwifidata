@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}"/>
+<script type="text/javascript" src="{{url_for('static', filename='logsjavascript.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>Home</title>
+</head>
+
+<body>
+<div class="main">
+	<div id="new" class="container">
+    	<ul class="nav nav-tabs">
+        	<li class="active"><a class= "bg-info" data-toggle="tab" href="#homepage">Home</a></li>
+        	<li><a class= "bg-warning" data-toggle="tab" href="#data">Access Data</a></li>
+        	<li><a class= "bg-danger" data-toggle="tab" href="#contact">Contact</a></li>
+        	<li><a class= "bg-success" data-toggle="tab" href="#queries">Submit Queries</a></li>
+    	</ul>
+		<div class="tab-content">
+			<div id="homepage" class="tab-pane fade in active">
+				<h1>About the Project</h1>
+			</div>
+			<div id="data" class="tab-pane fade">
+				<ul class="tablinks1">
+        			<li class="active"><a data-toggle="tab" href="#all" >All the Data</a></li>
+        			<li><a data-toggle="tab" href="#day" >According to Day</a></li>
+        			<li><a data-toggle="tab" href="#date" >According to Date</a></li>
+        			<li><a data-toggle="tab" href="#time" >According to Time</a></li>
+    			</ul>
+    			
+    			<div class="tab-content">
+				<div class="tab-pane fade in active" id="all">
+				<form>
+				<div class="cust">
+				<div  class="classroomselect">
+					<select id = "classroom" >
+						<option value="">Please Select Classroom</option>
+						<option value=" B-002">B-002</option>
+						<option value=" B-003">B-003</option>
+						<option value=" B-004">B-004</option>
+					</select>
+				</div>
+				</div>
+				<div class="submitbtn">
+    	    		<input type="button" id="form_id" value="Submit" onclick = "AllData()"/>
+    	    	</div>
+	        	</form>
+    	    	</div>
+	        	<div class="tab-pane fade" id="day">
+        		<form>
+        		<div class="cust">
+        			<div  class="classroomselect">
+					<select id = "classroom1">
+						<option value="">Please Select Classroom</option>
+						<option value=" B-002">B-002</option>
+						<option value=" B-003">B-003</option>
+						<option value=" B-004">B-004</option>
+					</select>
+					</div>
+					<div class="newclass">        	
+					<select id="newday" name="day select">
+						<option value="">Please Select Day</option>
+                		<option value="Mon">Monday</option>
+                		<option value="Tue">Tuesday</option>
+                		<option value="Wed">Wednesday</option>
+            	    	<option value="Thu">Thursday</option>
+        	        	<option value="Fri">Friday</option>
+    	            	<option value="Sat">Saturday</option>
+	                	<option value="Sun">Sunday</option>
+        			</select>
+        			</div>
+        		</div>
+        			<div class="submitbtn">
+        			<input type="button" id="form_id1" value="Submit" onclick = "DayData()">
+        			</div>
+        		</form>
+        		</div>
+    	    	<div class="tab-pane fade" id="date">
+		        <form method="post">
+		        	<div class="cust">
+		        	<div  class="classroomselect">
+        			<select id = "classroom2">
+						<option value="">Please Select Classroom</option>
+						<option value=" B-002">B-002</option>
+						<option value=" B-003">B-003</option>
+						<option value=" B-004">B-004</option>
+					</select>
+					</div>
+					<div class="newclass">
+	            	<input id="newdate" type="date">
+	            	</div>
+	            	</div>
+	            	<div class="submitbtn">
+            		<input type="button" id="form_id2" value="Submit" onclick = "DateData()">
+            		</div> 
+        		</form>
+	        	</div>
+	        	<div class="tab-pane fade" id="time">
+	        	<form method="post">
+	        		<div class="cust">
+	        		<div  class="classroomselect">
+    	    		<select id = "classroom3">
+						<option value="">Please Select Classroom</option>
+						<option value=" B-002">B-002</option>
+						<option value=" B-003">B-003</option>
+						<option value=" B-004">B-004</option>
+					</select>
+					</div>
+					<div class="newclass">
+        				<input id="dates" type="date">
+        			</div>
+        			<div class="newclass">
+        				<input id="times1" type="time">
+        				<input id="times2" type="time">
+        			</div>
+        			</div>
+        			<div class="submitbtn">
+        				<input type="button" id="form_id3" value="Submit" onclick="TimeData()">
+        			</div>
+        		</form>
+        		</div>
+        		</div>
+        	</div>
+        	<div id="contact" class="tab-pane fade">
+        		<h3>Name:        Abhijeet Kale</h3>
+        		<h3>Student Id:  15203294</h3>
+        		<h3>Contact No.: 0894495931</h3>
+        		<div id= "logos" >
+        			<a target="_blank" title="follow me on twitter" href="https://twitter.com/kale_abhi">
+        				<img alt="follow me on twitter" src="//login.create.net/images/icons/user/twitter_40x40.png" border=0>
+        			</a>
+        			<a target="_blank" title="find us on Facebook" href="https://www.facebook.com/attenuators">
+        				<img alt="follow me on facebook" src="//login.create.net/images/icons/user/facebook_40x40.png" border=0>
+        			</a>
+        			<a target="_blank" title="follow me on youtube" href="https://www.youtube.com/user/calculator991">
+        				<img alt="follow me on youtube" src="https://c866088.ssl.cf3.rackcdn.com/assets/youtube40x40.png" border=0>
+        			</a>
+        			<a href="https://ie.linkedin.com/pub/abhijeet-kale/3a/56/566">
+          				<img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x33.png" width="160" height="33" border="0" alt="View Abhijeet Kale's profile on LinkedIn">        
+    				</a>
+        		</div>
+        	</div>
+       		<div id="queries" class="tab-pane fade">
+       			<div class="newcontain">
+       			<form action="" method="POST" enctype="multipart/form-data">
+       				<div class="queryContainer">
+       			
+       						forchanges
+    				</div>
+       			</form>
+       			</div>
+       		</div>
+       	</div>
+	</div>  
+</div>
+
+
+</body>
+</html>
