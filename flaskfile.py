@@ -56,6 +56,7 @@ def dateWise1(roomno,date1):
     cur.execute("select * from logs where RoomNumber=\"{}\" and Date=\"{}\"".format(roomno,date1))
     
     data=cur.fetchall()
+    
     print(data)
     return json.dumps(data)
 
@@ -64,6 +65,16 @@ def dateandtime(roomno,dat,time1,time2):
     con = get_db()
     cur = con.cursor()
     cur.execute("select * from logs where RoomNumber=\"{}\" and Date=\"{}\" and Time between \"{}\" and \"{}\"".format(roomno,dat,time1,time2))
+    
+    data = cur.fetchall()
+    print(data)
+    return json.dumps(data)
+
+@app.route('/lectureclass/<lecture>')
+def lecturetime(lecture):
+    con = get_db()
+    cur = con.cursor()
+    cur.execute("select t.Classroom, t.Lectures, t.Date, l.Time, l.AssociatedCC, l.AuthenticatedCC from logs l, timetable t where (l.RoomNumber=t.Classroom) and t.Lectures=\"{}\" and (l.Time between t.Time1 and t.Time2)".format(lecture,lecture))
     
     data = cur.fetchall()
     print(data)

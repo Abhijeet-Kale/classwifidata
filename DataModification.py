@@ -75,13 +75,23 @@ def createDatabase():
     con = sqlite3.connect(database)
     cur = con.cursor()
     cur.execute('''CREATE TABLE logs (Campus, Building, RoomNumber, Day, Date, Time, Year, AssociatedCC, AuthenticatedCC)''')
+    cur.execute('''CREATE TABLE timetable (Classroom, Date, Time1, Time2, Lectures)''')
+    
     creader = csv.reader(open('F:\Research Practicum\Data\logs1.csv', 'rt'), delimiter=',', quotechar='|')
+    nreader = csv.reader(open('F:\\Research Practicum\\Data\\timetablesheet.csv', 'rt'))
+
     t = (creader,)
     for t in creader:
         cur.executemany("INSERT INTO logs (Campus, Building, RoomNumber, Day, Date, Time, Year, AssociatedCC, AuthenticatedCC) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", (t,))
+
+    nt = (nreader,)
+    for nt in nreader:
+        cur.executemany("INSERT INTO timetable (Classroom, Date, Time1, Time2, Lectures) VALUES (?, ?, ?, ?, ?);", (nt,))
     con.commit()
+
     print()
     print("Database created")
+
 
 
 if __name__ == '__main__':

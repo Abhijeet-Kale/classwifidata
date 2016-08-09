@@ -14,7 +14,7 @@
 	display: inline-block;
     color: black;
     text-align: center;
-    padding: 8px 75px;
+    padding: 8px 45px;
     text-decoration: none;
     transition: 0.3s;
     font-size: 17px;	
@@ -192,6 +192,11 @@ tr:nth-child(odd) {
 	padding-top:8px;
 }
 
+.submitbtn1{
+	padding-left:95px;
+	padding-top:8px;
+}
+
 input[type=button]{
     background-color: #C10BC7;
     border-radius: 4px;
@@ -231,25 +236,27 @@ input[type=time]{
 input[type=text]{
 	padding: 4px 45px;
 	border-radius: 10px;
-	text-align: left;
+	text-align: center;
 	text-decoration: none;
-	margin: 1px 8px;
+	margin: 8px 8px;
 }
 
 input[type=email]{
 	padding: 4px 45px;
 	border-radius: 10px;
-	text-align: left;
+	text-align: center;
 	text-decoration: none;
-	margin: 1px 8px;
+	margin: 8px 8px;
 }
 
-#query{
+#textarea {
+	width: 260px;
+	height:90px;
 	padding: 4px 45px;
 	border-radius: 10px;
-	text-align: left;
+	text-align: center;
 	text-decoration: none;
-	margin: 1px 10px;
+	margin: 8px 8px;
 }
 
 #queries{
@@ -260,3 +267,5 @@ input[type=email]{
     position:absolute;
     padding-top: 75px;
  }
+ 
+ 

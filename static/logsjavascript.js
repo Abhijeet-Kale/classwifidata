@@ -36,15 +36,27 @@ var tableData = '<table><tr><th>Campus</th><th>Building</th><th>Room Number</th>
         var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
                          ];
-        var newd = (monthNames[d.getMonth()] +" "+ d.getDate()+" "+ d.getFullYear());
+        
+        var days = d.getDate();
+        if(days < 10){
+        	var days = '0'+days;
+        }
+        
+        var newd = (monthNames[d.getMonth()] +" "+ days+" "+ d.getFullYear());
         var path = "/date/"+c+"/"+newd
        
         
         $.getJSON(path,function(data){
+        	if (!data[0]) {
+        		alert("Sorry, Data is not in the Database!!!!");
+        	}
+        	else{
         	$.each(data, function(index, new_data) {
         		 tableData += '<tr><td>'+new_data[0]+'</td><td>'+new_data[1]+'</td><td>'+new_data[2]+'</td><td>'+new_data[3]+'</td><td>'+new_data[4]+'</td><td>'+new_data[5]+'</td><td>'+new_data[6]+'</td><td>'+new_data[7]+'</td><td>'+new_data[8]+'</td></tr>';
         	});
+        	
         	$('#date').html(tableData);
+        	}
     	});
         
 		document.getElementById("form_id2").submit()   
@@ -63,8 +75,14 @@ var tableData = '<table><tr><th>Campus</th><th>Building</th><th>Room Number</th>
  	    var y1 = y.split(":")
  	    var newt = 0
  	    
- 	   	var newd = (monthNames[d.getMonth()] +" "+ d.getDate()+" "+ d.getFullYear());
+ 	    var days = d.getDate();
+        if(days < 10){
+        	var days = '0'+days;
+        }
+        
+ 	   	var newd = (monthNames[d.getMonth()] +" "+ days +" "+ d.getFullYear());
 	   	var path = "/datime/"+c+"/"+newd+"/"+y+"/"+z
+	   	
 	   	if (z1[0]>y1[0]){
 	   		newt=1
 	    }
@@ -77,12 +95,36 @@ var tableData = '<table><tr><th>Campus</th><th>Building</th><th>Room Number</th>
 	    }   
 	   	if (newt == 1){
 	   	$.getJSON(path,function(data){
+	   		if (!data[0]) {
+        		alert("Sorry, Data is not in the Database!!!!");
+        	}
+        	else{
        	$.each(data, function(index, new_data) {
        		 tableData += '<tr><td>'+new_data[0]+'</td><td>'+new_data[1]+'</td><td>'+new_data[2]+'</td><td>'+new_data[3]+'</td><td>'+new_data[4]+'</td><td>'+new_data[5]+'</td><td>'+new_data[6]+'</td><td>'+new_data[7]+'</td><td>'+new_data[8]+'</td></tr>';
        		});
 
        		$('#time').html(tableData);
+        	}
    			});
 	   	document.getElementById("form_id3").submit()
 	   	}
  	}
+ 	
+ 	function LectureData(){
+ 		var newtableData = '<table><tr><th>Classroom</th><th>Module</th><th>Date</th><th>Time</th><th>Associated credit count</th><th>Authenticated credit count</th></tr>';
+ 	    var lid = document.getElementById("lectr").value;
+ 		
+ 		
+	   	var path = "/lectureclass/"+lid;
+
+	   	
+	   	$.getJSON(path,function(data){
+       	$.each(data, function(index, new_data) {
+       		 newtableData += '<tr><td>'+new_data[0]+'</td><td>'+new_data[1]+'</td><td>'+new_data[2]+'</td><td>'+new_data[3]+'</td><td>'+new_data[4]+'</td><td>'+new_data[5]+'</td></tr>';
+       		});
+
+       		$('#lect').html(newtableData);
+   			});
+	   	document.getElementById("form_id4").submit()
+	   	
+}

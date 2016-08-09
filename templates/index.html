@@ -30,6 +30,7 @@
         			<li><a data-toggle="tab" href="#day" >According to Day</a></li>
         			<li><a data-toggle="tab" href="#date" >According to Date</a></li>
         			<li><a data-toggle="tab" href="#time" >According to Time</a></li>
+        			<li><a data-toggle="tab" href="#lect" >According to Lecture</a></li>
     			</ul>
     			
     			<div class="tab-content">
@@ -91,7 +92,7 @@
 					</select>
 					</div>
 					<div class="newclass">
-	            	<input id="newdate" type="date">
+	            		<input id="newdate" type="date">
 	            	</div>
 	            	</div>
 	            	<div class="submitbtn">
@@ -123,6 +124,50 @@
         			</div>
         		</form>
         		</div>
+        		<div class="tab-pane fade" id="lect">
+	        	<form method="post">
+	        		<div class="cust">
+	        			<div class="newclass">
+        					<select id="lectr" name="day select">
+								<option value="">Please Select Module</option>
+								<option value="COMP10110">COMP10110</option>
+    	            			<option value="COMP10130">COMP10130</option>
+        	        			<option value="COMP10280">COMP10280</option>
+            	    			<option value="COMP20010">COMP20010</option>
+                				<option value="COMP20020">COMP20020</option>
+                				<option value="COMP20110">COMP20110</option>
+                				<option value="COMP20130">COMP20130</option>
+                				<option value="COMP30010">COMP30010</option>
+	                			<option value="COMP30060">COMP30060</option>
+    	            			<option value="COMP30070">COMP30070</option>
+        	        			<option value="COMP30080">COMP30080</option>
+            	    			<option value="COMP30110">COMP30110</option>
+                				<option value="COMP30170">COMP30170</option>
+                				<option value="COMP30190">COMP30190</option>
+                				<option value="COMP30220">COMP30220</option>
+                				<option value="COMP30240">COMP30240</option>
+	                			<option value="COMP30250">COMP30250</option>
+    	            			<option value="COMP30260">COMP30260</option>
+        	        			<option value="COMP30520">COMP30520</option>
+            	    			<option value="COMP40150">COMP40150</option>
+                				<option value="COMP40370">COMP40370</option>
+                				<option value="COMP40660">COMP40660</option>
+                				<option value="COMP41110">COMP41110</option>
+                				<option value="COMP41450">COMP41450</option>
+	                			<option value="COMP41690">COMP41690</option>
+    	            			<option value="COMP47290">COMP47290</option>
+        	        			<option value="COMP47300">COMP47300</option>
+        	        			<option value="IS40640">IS40640</option>
+        	        			<option value="SCI30060">SCI30060</option>
+        	        			<option value="MATH1020">MATH1020</option>
+        					</select>
+        				</div>
+        			</div>
+        			<div class="submitbtn">
+        				<input type="button" id="form_id4" value="Submit" onclick="LectureData()">
+        			</div>
+        		</form>
+        		</div>
         		</div>
         	</div>
         	<div id="contact" class="tab-pane fade">
@@ -146,18 +191,19 @@
         	</div>
        		<div id="queries" class="tab-pane fade">
        			<div class="newcontain">
-       			<form action="" method="POST" enctype="multipart/form-data">
-       				<div class="queryContainer">
-       			
-       						forchanges
-    				</div>
-       			</form>
+						<form id="new_form" method="post" 
+						action = "https://script.google.com/macros/s/AKfycbwvQba9HMdL7TKiTqQkkMw7t1xZV5B2dHAFQylBo2XgBpdqpCo/exec">
+							<input type="text" name="Name" placeholder="Your Name"></br>
+							<textarea id="textarea" name="message" placeholder="Message"></textarea></br>
+							<input type="email" name="EmailId" placeholder="Email Id"></br>
+							<div class="submitbtn1">
+							<input type="button" value="Send">
+							</div>		
+						</form>
        			</div>
        		</div>
        	</div>
 	</div>  
 </div>
-
-
 </body>
 </html>
