@@ -1,15 +1,18 @@
+#Importing flask, json and sqlite3
 from flask import Flask, render_template, g
 import json
 import sqlite3
 
 
 app = Flask(__name__)
-database = 'C:\\Users\\Abhijeet\\workspace\\WifiDataLogs\\data\\wifidatabase.db'
+database = '/var/www/FlaskApp/FlaskApp/data/wifidatabase.db'
 
 # Connect to database using config.py file
 # This contains API key and name of our database file
 def db_connect():
     return sqlite3.connect(database)
+
+db_connect()
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -24,11 +27,12 @@ def close_connection(exception):
         db.close()
 
 
+#Adding route decorator and generating HTML
 @app.route('/', methods=['GET', 'POST'])
 def Home():
     return render_template("index.html")
 
-
+#Function to display all the data as per the room number
 @app.route('/json1/<roomno>')
 def json2(roomno):
     con = get_db()
@@ -39,6 +43,7 @@ def json2(roomno):
     print(data)
     return json.dumps(data)
 
+#Function to display data as per the room number and according to the day
 @app.route('/day/<roomno>/<weekday>')
 def dayWise1(roomno,weekday):
     con = get_db()
@@ -49,6 +54,7 @@ def dayWise1(roomno,weekday):
     print(data)
     return json.dumps(data)
 
+#Function to display data as per the room number and date
 @app.route('/date/<roomno>/<date1>')
 def dateWise1(roomno,date1):
     con = get_db()
@@ -56,20 +62,21 @@ def dateWise1(roomno,date1):
     cur.execute("select * from logs where RoomNumber=\"{}\" and Date=\"{}\"".format(roomno,date1))
     
     data=cur.fetchall()
-    
     print(data)
     return json.dumps(data)
 
+#Function to display data as per the room number, date and between particular time period
 @app.route('/datime/<roomno>/<dat>/<time1>/<time2>')
 def dateandtime(roomno,dat,time1,time2):
     con = get_db()
     cur = con.cursor()
-    cur.execute("select * from logs where RoomNumber=\"{}\" and Date=\"{}\" and Time between \"{}\" and \"{}\"".format(roomno,dat,time1,time2))
+    cur.execute("select l.Campus, l.Building, l.RoomNumber, l.Day, l.Date, l.Year, Avg(l.AverageUsers), t.RegistersUsers from logs l, timetable t where (l.RoomNumber=t.Classroom and l.Date=t.Date) and l.RoomNumber=\"{}\" and l.Date=\"{}\" and (l.Time between \"{}\" and \"{}\")".format(roomno,dat,time1,time2))
     
     data = cur.fetchall()
     print(data)
     return json.dumps(data)
 
+#Function to display data as per the module
 @app.route('/lectureclass/<lecture>')
 def lecturetime(lecture):
     con = get_db()
@@ -80,5 +87,6 @@ def lecturetime(lecture):
     print(data)
     return json.dumps(data)
 
+#Main 
 if __name__ == "__main__":
     app.run(debug=True)

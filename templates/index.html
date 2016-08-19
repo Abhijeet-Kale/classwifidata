@@ -3,15 +3,19 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}"/>
-<script type="text/javascript" src="{{url_for('static', filename='logsjavascript.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='/css/style.css')}}"/>
+<script type="text/javascript" src="{{url_for('static', filename='js/logsjavascript.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<title>Home</title>
+<title>Attendance Tracker</title>
 </head>
 
 <body>
+<div id="ucdlogo"><img src="../static/images/ucd_logo.png" alt="Smiley face" height="62" width="52" hspace="20"></div>
+<div id="title">
+	<h1>Attendance Tracker</h1>
+</div>
 <div class="main">
 	<div id="new" class="container">
     	<ul class="nav nav-tabs">
@@ -22,7 +26,12 @@
     	</ul>
 		<div class="tab-content">
 			<div id="homepage" class="tab-pane fade in active">
-				<h1>About the Project</h1>
+				<h3>Attendance Tracker provides the infomration about the number of students present in the classroom at particular time. </h3>
+				<h3>Each and every classrooms have their own WiFi routers, considering this fact we can identify the number of authenticated users connected to the wifi of the classroom. Depending on the number of devices each person is having, the number of students present in the classroom can be predicted. This application collects the log data from the server and with some modification of data displays the information on HTML page using flask app.
+				</h3> 
+				<h3>
+				Primarily, this application is useful for Module coordinators who can find the number of students present in his/her class on particular day. It will definitely help them to understand the interests of the students in their modules.    
+				</h3>
 			</div>
 			<div id="data" class="tab-pane fade">
 				<ul class="tablinks1">

@@ -8,6 +8,7 @@ import os
 import fnmatch
 import csv
 import sqlite3
+import pandas as pd
 
 def zipextract():
     fh = open('F:\Research Practicum\Data\CSI WiFiLogs.zip', 'rb')
@@ -69,24 +70,52 @@ def separateData():
             writer.writerow(row+[''.join(content1[:9])]+[''.join(content1[11:27])]+[''.join(content1[29:])]+[''.join(content[:3])]+[''.join(content[4:10]+content[29:])]+[''.join(content[11:19])]+[''.join(content[20:29])]+[''.join(content2)]+[''.join(content3)])
     print()
     print("New Log is created")
-    
+
+def averageData():
+    file1= open('F:\Research Practicum\Data\logs1.csv','rt')
+    reader = csv.reader(file1)
+    new_rows_list = []
+    for row in reader:
+        content = list(row[8])
+        content = ''.join(content)
+        new_rows_list.append(float(content)/1.27)
+
+    file1.close()
+
+    file2 = open('F:\Research Practicum\Data\logs2.csv','wt')
+    writer = csv.writer(file2)
+    for val in new_rows_list:
+        writer.writerow([val])
+    file2.close()
+
+    with open('F:\Research Practicum\Data\logs2.csv','rt') as input1, open('F:\Research Practicum\Data\logs3.csv','wt') as output:
+        non_blank = (line for line in input1 if line.strip())
+        output.writelines(non_blank)
+
+    a = pd.read_csv('F:\Research Practicum\Data\logs1.csv')
+    b = pd.read_csv('F:\Research Practicum\Data\logs3.csv')
+    frames = [a, b]
+    merged = pd.concat(frames, axis=1)
+    merged.to_csv('F:\Research Practicum\Data\logs4.csv', index=False)   
+
+
 def createDatabase():
     database = 'C:\\Users\\Abhijeet\\workspace\\WifiDataLogs\\data\\wifidatabase.db'
     con = sqlite3.connect(database)
     cur = con.cursor()
-    cur.execute('''CREATE TABLE logs (Campus, Building, RoomNumber, Day, Date, Time, Year, AssociatedCC, AuthenticatedCC)''')
-    cur.execute('''CREATE TABLE timetable (Classroom, Date, Time1, Time2, Lectures)''')
+    cur.execute(''' CREATE TABLE logs (Campus, Building, RoomNumber, Day, Date, Time, Year, AssociatedCC, AuthenticatedCC, AverageUsers)''')
+    cur.execute('''CREATE TABLE timetable (Classroom, Date, Time1, Time2, Lectures, RegistersUsers)''')
     
-    creader = csv.reader(open('F:\Research Practicum\Data\logs1.csv', 'rt'), delimiter=',', quotechar='|')
+    creader = csv.reader(open('F:\Research Practicum\Data\logs4.csv', 'rt'), delimiter=',', quotechar='|')
     nreader = csv.reader(open('F:\\Research Practicum\\Data\\timetablesheet.csv', 'rt'))
 
     t = (creader,)
     for t in creader:
-        cur.executemany("INSERT INTO logs (Campus, Building, RoomNumber, Day, Date, Time, Year, AssociatedCC, AuthenticatedCC) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", (t,))
+        cur.executemany("INSERT INTO logs (Campus, Building, RoomNumber, Day, Date, Time, Year, AssociatedCC, AuthenticatedCC, AverageUsers) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", (t,))
 
     nt = (nreader,)
     for nt in nreader:
-        cur.executemany("INSERT INTO timetable (Classroom, Date, Time1, Time2, Lectures) VALUES (?, ?, ?, ?, ?);", (nt,))
+        cur.executemany("INSERT INTO timetable (Classroom, Date, Time1, Time2, Lectures, RegistersUsers) VALUES (?, ?, ?, ?, ?, ?);", (nt,))
     con.commit()
 
     print()
@@ -96,8 +125,9 @@ def createDatabase():
 
 if __name__ == '__main__':
     
-    zipextract()
-    csvextract()
-    removeRedundant()
-    separateData()
+    #zipextract()
+    #csvextract()
+    #removeRedundant()
+    #separateData()
+    #averageData()
     createDatabase()

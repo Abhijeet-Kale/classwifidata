@@ -1,27 +1,27 @@
-/**
- * 
- */
-var tableData = '<table><tr><th>Campus</th><th>Building</th><th>Room Number</th><th>Day</th><th>Date</th><th>Time</th><th>Year</th><th>Associated credit count</th><th>Authenticated credit count</th></tr>';
+// creating variable table data to contain the table data
+var tableData = '<table><tr><th>Campus</th><th>Building</th><th>Room Number</th><th>Day</th><th>Date</th><th>Time</th><th>Year</th><th>Associated credit count</th><th>Authenticated credit count</th><th>Average Users</th></tr>';
 
+	// Function to get all the json data and dispay as html table
  	function AllData(){
  		var c = document.getElementById("classroom").value;
  		var path = "/json1/"+c
  		$.getJSON(path,function(data){
         	$.each(data, function(index, new_data) {
-        		 tableData += '<tr><td>'+new_data[0]+'</td><td>'+new_data[1]+'</td><td>'+new_data[2]+'</td><td>'+new_data[3]+'</td><td>'+new_data[4]+'</td><td>'+new_data[5]+'</td><td>'+new_data[6]+'</td><td>'+new_data[7]+'</td><td>'+new_data[8]+'</td></tr>';
+        		 tableData += '<tr><td>'+new_data[0]+'</td><td>'+new_data[1]+'</td><td>'+new_data[2]+'</td><td>'+new_data[3]+'</td><td>'+new_data[4]+'</td><td>'+new_data[5]+'</td><td>'+new_data[6]+'</td><td>'+new_data[7]+'</td><td>'+new_data[8]+'</td><td>'+new_data[9]+'</td></tr>';
         		});
 
         		$('#all').html(tableData);
     	});
      }
  	
+	// Function to get json data according to the day and classroom and display on html
  	function DayData(){
  		var c = document.getElementById("classroom1").value;
  		var x = document.getElementById("newday").value;
  		var path = "/day/"+c+"/"+x
  		$.getJSON(path,function(data){
         	$.each(data, function(index, new_data) {
-        		 tableData += '<tr><td>'+new_data[0]+'</td><td>'+new_data[1]+'</td><td>'+new_data[2]+'</td><td>'+new_data[3]+'</td><td>'+new_data[4]+'</td><td>'+new_data[5]+'</td><td>'+new_data[6]+'</td><td>'+new_data[7]+'</td><td>'+new_data[8]+'</td></tr>';
+        		 tableData += '<tr><td>'+new_data[0]+'</td><td>'+new_data[1]+'</td><td>'+new_data[2]+'</td><td>'+new_data[3]+'</td><td>'+new_data[4]+'</td><td>'+new_data[5]+'</td><td>'+new_data[6]+'</td><td>'+new_data[7]+'</td><td>'+new_data[8]+'</td><td>'+new_data[9]+'</td></tr>';
         		});
 
         		$('#day').html(tableData);
@@ -29,6 +29,7 @@ var tableData = '<table><tr><th>Campus</th><th>Building</th><th>Room Number</th>
  		document.getElementById("form_id1").submit()
  	}
  	
+	// Function to get json data as per the date and display as html table
  	function DateData(){
  		var c = document.getElementById("classroom2").value;
  		var x = document.getElementById("newdate").value;
@@ -52,7 +53,7 @@ var tableData = '<table><tr><th>Campus</th><th>Building</th><th>Room Number</th>
         	}
         	else{
         	$.each(data, function(index, new_data) {
-        		 tableData += '<tr><td>'+new_data[0]+'</td><td>'+new_data[1]+'</td><td>'+new_data[2]+'</td><td>'+new_data[3]+'</td><td>'+new_data[4]+'</td><td>'+new_data[5]+'</td><td>'+new_data[6]+'</td><td>'+new_data[7]+'</td><td>'+new_data[8]+'</td></tr>';
+        		 tableData += '<tr><td>'+new_data[0]+'</td><td>'+new_data[1]+'</td><td>'+new_data[2]+'</td><td>'+new_data[3]+'</td><td>'+new_data[4]+'</td><td>'+new_data[5]+'</td><td>'+new_data[6]+'</td><td>'+new_data[7]+'</td><td>'+new_data[8]+'</td><td>'+new_data[9]+'</td></tr>';
         	});
         	
         	$('#date').html(tableData);
@@ -62,7 +63,9 @@ var tableData = '<table><tr><th>Campus</th><th>Building</th><th>Room Number</th>
 		document.getElementById("form_id2").submit()   
     }
  	
+	// Function to display json data as html table data according to the time and date 
  	function TimeData(){
+ 		var tableData1 = '<table><tr><th>Campus</th><th>Building</th><th>Room Number</th><th>Day</th><th>Date</th><th>Year</th><th>Average Users</th><th>Registerd Users</th></tr>';
  		var c = document.getElementById("classroom3").value;
  		var x = document.getElementById("dates").value;
  		var d = new Date(x)
@@ -100,16 +103,17 @@ var tableData = '<table><tr><th>Campus</th><th>Building</th><th>Room Number</th>
         	}
         	else{
        	$.each(data, function(index, new_data) {
-       		 tableData += '<tr><td>'+new_data[0]+'</td><td>'+new_data[1]+'</td><td>'+new_data[2]+'</td><td>'+new_data[3]+'</td><td>'+new_data[4]+'</td><td>'+new_data[5]+'</td><td>'+new_data[6]+'</td><td>'+new_data[7]+'</td><td>'+new_data[8]+'</td></tr>';
+       		 tableData1 += '<tr><td>'+new_data[0]+'</td><td>'+new_data[1]+'</td><td>'+new_data[2]+'</td><td>'+new_data[3]+'</td><td>'+new_data[4]+'</td><td>'+new_data[5]+'</td><td>'+new_data[6]+'</td><td>'+new_data[7]+'</td></tr>';
        		});
 
-       		$('#time').html(tableData);
+       		$('#time').html(tableData1);
         	}
    			});
 	   	document.getElementById("form_id3").submit()
 	   	}
  	}
  	
+	// Function  to display json data as HTML data according to the lecture
  	function LectureData(){
  		var newtableData = '<table><tr><th>Classroom</th><th>Module</th><th>Date</th><th>Time</th><th>Associated credit count</th><th>Authenticated credit count</th></tr>';
  	    var lid = document.getElementById("lectr").value;
@@ -128,3 +132,4 @@ var tableData = '<table><tr><th>Campus</th><th>Building</th><th>Room Number</th>
 	   	document.getElementById("form_id4").submit()
 	   	
 }
+
