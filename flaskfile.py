@@ -1,3 +1,4 @@
+#Importing flask, json and sqlite3
 from flask import Flask, render_template, g
 import json
 import sqlite3
@@ -23,12 +24,13 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-
+#Adding URL rule and generating HTML
 @app.route('/', methods=['GET', 'POST'])
 def Home():
     return render_template("index.html")
 
 
+#Function to display all the data as per the room number
 @app.route('/json1/<roomno>')
 def json2(roomno):
     con = get_db()
@@ -40,6 +42,7 @@ def json2(roomno):
     return json.dumps(data)
 
 
+#Function to display data as per the room number, date and between particular time period
 @app.route('/datime/<roomno>/<dat>/<time1>/<time2>')
 def dateandtime(roomno,dat,time1,time2):
     con = get_db()
@@ -50,15 +53,19 @@ def dateandtime(roomno,dat,time1,time2):
     print(data)
     return json.dumps(data)
 
+
+#Function to display data as per the module
 @app.route('/lectureclass/<lecture>')
 def lecturetime(lecture):
     con = get_db()
     cur = con.cursor()
-    cur.execute("select t.Classroom, t.Lectures, t.Date, l.Time, l.AssociatedCC, l.AuthenticatedCC from logs l, timetable t where (l.RoomNumber=t.Classroom) and t.Lectures=\"{}\" and (l.Time between t.Time1 and t.Time2)".format(lecture,lecture))
+    cur.execute("select t.Classroom, t.Lectures, t.Date, l.Time, l.AssociatedCC, l.AuthenticatedCC from logs l, timetable t where (l.RoomNumber=t.Classroom) and t.Lectures=\"{}\" and (l.Time between t.Time1 and t.Time2)".format(lecture))
     
     data = cur.fetchall()
     print(data)
     return json.dumps(data)
 
+
+#main
 if __name__ == "__main__":
     app.run(debug=True)
